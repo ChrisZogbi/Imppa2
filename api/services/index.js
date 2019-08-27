@@ -1,4 +1,4 @@
-var sql = require("mssql");
+var mssql = require("mssql"); 
 
 exports.config = {
     user: 'ImppaNode',
@@ -7,8 +7,9 @@ exports.config = {
     database: 'Imppa' 
 };
 
-exports.ConectarDB = function()
-{
-    sql.connect(config);
-}
+// exports.connection = mssql.connect(config, function (err) {
+//     if (err)
+//         throw err; 
+// });
+
 

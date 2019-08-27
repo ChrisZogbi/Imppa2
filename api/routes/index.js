@@ -1,18 +1,9 @@
 const express = require('express')
-const router = express.Router()
-const UserController = require('../controllers/UserController');
+var users = require('./userRoutes')
 
-//app.route('/users')
-//  .get(UserController.ObtenerUsuarios);
-////
-//app.route('/tipousuario')
-//  .get(UserController.ObtenerTipoUsuarios);
-
-router.get('/users', UserController.ObtenerUsuarios);
-router.get('/tipoUsuario', UserController.ObtenerTipoUsuarios);
-//router.get('/user/:id', function (req, res) {
-//    console.log('ID:', req.params.id);
-//    UserController.ObtenerUsuario(req.params.id, res);
-//  });
-
-module.exports = router;
+exports.assignRoutes = function (app) {
+    app.get('/users', users.getUsers);
+    app.post('/users', users.addUser);
+    app.put('/users/:userId', users.updateUser);
+    app.delete('/users/:userId', users.deleteUser);
+}

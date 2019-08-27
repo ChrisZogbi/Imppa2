@@ -2,11 +2,9 @@ var app = require("../app.js");
 var sql = require("./index");
 var service = require("mssql");
 
-exports.request = function(){return sql.Request();}
-
-exports.ObtenerUsuarios = function(req, res)
+exports.getUsers = function(req, res)
 {
-    var query = `SELECT * FROM TipoUsuario`
+    var query = `SELECT * FROM Usuarios`
 
     service.connect(sql.config, function (err) {
         var request = new service.Request();
@@ -16,73 +14,27 @@ exports.ObtenerUsuarios = function(req, res)
             if (err) console.log(err)
             
             // send data as a response
-            res.send(recordset[0]);
+            res.json(recordset.recordset);
         });
     });
-}
+};
 
-exports.ObtenerTipoUsuario = function(req, res)
+exports.addUser = function(req, res)
 {
-    var query = `SELECT * FROM TipoUsuario`
-            
-        request.query(query, function (err, recordset) {
+    var Usuario = req.body;
+
+    var query =  `INSERT INTO Usuarios VALUES (${Usuario.TipoUsuario}, '${Usuario.Mail}', '${Usuario.Contraseña}', '${Usuario.AddedDate}', '${Usuario.LastLogin}', '${Usuario.Nombre}', '${Usuario.Apellido}', '${Usuario.Direccion}')`;
+
+    console.log(query);
+    service.connect(sql.config, function (err) {
+        var request = new service.Request();
     
+        request.query(query, function (err, result) {
             if (err) console.log(err)
         
-            // send records as a response
-            return recordset;
-            //sql.close();
+            // send data as a response
+            res.json(result);
         });
+
+    });
 }
-
-
-//module.exports = function () {
-//  return {
-//      findUsers: function (req, res) {
-//          var query = `SELECT * FROM Usuarios`
-//          
-//          request.query(query, function (err, recordset) {
-//    
-//              if (err) console.log(err)
-//        
-//              // send records as a response
-//              res.send(recordset);
-//              //sql.close();
-//          });
-//      },
-//      saveUser: function (user, req, res) {
-//          var query = `INSERT INTO USUARIOS VALUES 
-//          (
-//              ${user.TipoUsuario},
-//              ${user.Mail},
-//              ${user.Password},
-//              ${user.AddedDate},
-//              ${user.LastLogin},
-//              ${user.Nombre},
-//              ${user.Apellido},
-//              ${user.Direccion}
-//          )`
-//          
-//          request.query(query, function (err, recordset) {
-//    
-//              if (err) console.log(err)
-//        
-//              // send records as a response
-//              res.send(recordset);
-//              //sql.close();
-//          });
-//      },
-//      ObtenerTipoUsuario: function (user, req, res) {
-//          var query = `SELECT * FROM TipoUsuario`
-//          
-//          request.query(query, function (err, recordset) {
-//    
-//              if (err) console.log(err)
-//        
-//              // send records as a response
-//              res.send(recordset);
-//              //sql.close();
-//          });
-//      }
-//  };
-//}
