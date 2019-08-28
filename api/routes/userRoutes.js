@@ -10,9 +10,9 @@ exports.addUser = function(req, res) {
 }
 
 exports.updateUser = function(req, res) {
-    
+    return(UserController.updateUser(req, res));
 }
 
 exports.deleteUser = function(req, res) {
-    
+    return(UserController.deleteUser(req, res));
 }
