@@ -1,15 +1,10 @@
-var mssql = require("mssql"); 
+var sql = require('mssql');
 
-exports.config = {
+exports.config = new sql.ConnectionPool({
     user: 'ImppaNode',
     password: 'Lagash2016',
     server: 'localhost', 
     database: 'Imppa' 
-};
-
-// exports.connection = mssql.connect(config, function (err) {
-//     if (err)
-//         throw err; 
-// });
+});
 
 
