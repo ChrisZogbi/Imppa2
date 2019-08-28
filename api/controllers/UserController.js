@@ -1,12 +1,12 @@
-var service = require("mssql");
-var sql = require("../services/index");
-var UserService  = require('../services/UserService')
+var UserService  = require('../services/UserService');
 
- exports.ObtenerUsuarios = function(req, res) {
-    var data = UserService.ObtenerUsuarios;
-    res.json(data);
+ exports.getUsers = function(req, res) {
+   console.log("llego al controller"); 
+   var data = UserService.getUsers(req, res);
+   return(data);
  };
  
- exports.ObtenerTipoUsuarios = function(req, res) {
-    res.send(UserService.ObtenerTipoUsuario);
+ exports.addUser = function(req, res) {
+    console.log(req.body);
+    return(UserService.addUser(req, res));
 };

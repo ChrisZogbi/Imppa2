@@ -1,13 +1,14 @@
-var express = require('express');
-var sql = require("mssql");
+var express= require('express');
 var app = express();
-const ImppaService  = require('./services/index')
-const indexRouter = require('./routes/index');
+var bodyParser = require('body-parser');
+var routes = require('./routes/index');
+var db = require('./services/index')
 
-//ImppaService.ConectarDB();
+app.use(bodyParser.json());
+routes.assignRoutes(app);
 
-var server = app.listen(8081, function () {
-    console.log('Server is running..');
+
+var server = app.listen(3000, function () {
+    console.log('Server is running in 3000..');
 });
 
-app.use('/', indexRouter);
