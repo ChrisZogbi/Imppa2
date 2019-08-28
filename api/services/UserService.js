@@ -2,21 +2,34 @@ var app = require("../app.js");
 var sql = require("./index");
 var service = require("mssql");
 
+
+
+
 exports.getUsers = function(req, res)
 {
-    var query = `SELECT * FROM Usuarios`
-
-    service.connect(sql.config, function (err) {
-        var request = new service.Request();
-        
-        // query to the database and get the data
-        request.query(query, function (err, recordset) {
+    var pool = sql.config.connect(function () {
+        var query = `SELECT * FROM Usuarios`
+        const request = new service.Request(sql.config)
+        request.query(query, function (err, result) {
             if (err) console.log(err)
             
-            // send data as a response
-            res.json(recordset.recordset);
+            res.json(result.recordset);
         });
     });
+    
+    
+
+    // service.connect(sql.config, function (err) {
+    //     var request = new service.Request();
+        
+    //     // query to the database and get the data
+    //     request.query(query, function (err, recordset) {
+    //         if (err) console.log(err)
+            
+    //         // send data as a response
+    //         res.json(recordset.recordset);
+    //     });
+    // });
 };
 
 exports.addUser = function(req, res)
