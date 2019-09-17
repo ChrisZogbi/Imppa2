@@ -1,6 +1,6 @@
-var sql = require('mssql');
+import { ConnectionPool } from 'mssql';
 
-exports.config = new sql.ConnectionPool({
+export const config = new ConnectionPool({
     user: 'ImppaNode',
     password: 'Lagash2016',
     server: 'localhost', 
