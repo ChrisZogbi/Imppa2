@@ -21,7 +21,7 @@ CREATE TABLE [TipoClase]
 CREATE TABLE [TipoUsuario]
 (
 	[ID] INT IDENTITY PRIMARY KEY,
-	[Tipo] VARCHAR MAX NOT NULL
+	[Tipo] VARCHAR (MAX) NOT NULL
 )
 
 CREATE TABLE [Titulo]
@@ -43,8 +43,9 @@ CREATE TABLE [Usuarios]
 	[LastLogin] DATETIME NOT NULL,
 	[Nombre] varchar(50) NULL,
 	[Apellido] VARCHAR(50) NULL,
-	[Direccion] VARCHAR MAX
-	[Habilitado] bit not null,
+	[Telefono1] VARCHAR (15),
+	[Telefono1] VARCHAR (15),
+	[Habilitado] BIT NOT NULL
 )
 
 --Tabla Subcripciones
@@ -73,10 +74,10 @@ go
 CREATE TABLE [ClaseProfesor]
 (
 	[ID] INT IDENTITY PRIMARY KEY,
-	[IDUsuario] INT FOREIGN KEY REFERENCES Usuarios(ID) NOT NULL,
 	[IDCategoriaClase] INT FOREIGN KEY REFERENCES CategoriaClase(ID) NOT NULL,
 	[IDTipoClase] INT FOREIGN KEY REFERENCES TipoClase(ID) NOT NULL,
-	[Precio] INT NOT NULL
+	[Direccion] VARCHAR (MAX),
+	[Precio] INT NULL
 )
 
 
@@ -87,16 +88,23 @@ CREATE TABLE [SubscripcionUsuario]
 	[IDUsuario] INT FOREIGN KEY REFERENCES Usuarios(ID)NOT NULL,
 	[IDSubscripcion] INT FOREIGN KEY REFERENCES [Subscripcion](ID)NOT NULL
 )
+ 
+CREATE TABLE [ClaseXUsuario]
+(
+	[ID] INT IDENTITY PRIMARY KEY,
+	[IDUsuario] INT FOREIGN KEY REFERENCES Usuarios(ID) NOT NULL,
+	[IDClaseProfesor] INT FOREIGN KEY REFERENCES ClaseProfesor(ID) NOT NULL
+)
 
-
---Tabla Categorias de Clases
+--Tabla Categorias de Clases 
 CREATE TABLE [CategoriaClase]
 (
 	[ID] INT IDENTITY PRIMARY KEY,
-	[NombreCategoria] VARCHAR NOT NULL
+	[NombreCategoria] VARCHAR NOT NULL,
+	[Habilitado] BIT NOT NULL
 )
 
---Tabla Tipo Clases
+--Tabla Tipo Clases -- Presencial individual, presencial grupal,Virtual individual, Virtual Grupal
 CREATE TABLE [TipoClase]
 (
 	[ID] INT IDENTITY PRIMARY KEY,
