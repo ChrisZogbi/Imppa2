@@ -1,47 +1,47 @@
-var app = require("../app.js");
-var sql = require("./index");
-var service = require("mssql");
+import app from "../app.js";
+import { config } from "./index";
+import { Request } from "mssql";
 
-exports.getUsers = function(req, res)
+export function getUsers(req, res)
 {
-    var pool = sql.config.connect(function () {
+    var pool = config.connect(() => {
         var query = `SELECT * FROM Usuarios`
-        const request = new service.Request(sql.config)
-        request.query(query, function (err, result) {
+        const request = new Request(config)
+        request.query(query, (err, result) => {
             if (err) res.json(err)
             else res.json(result.recordset);
         });
     });
-};
+}
 
-exports.getUser = function(req, res)
+export function getUser(req, res)
 {
-    var pool = sql.config.connect(function () {
+    var pool = config.connect(() => {
         var query = `SELECT * FROM Usuarios WHERE ID = ${req.body.UserId}`
-        const request = new service.Request(sql.config)
-        request.query(query, function (err, result) {
+        const request = new Request(config)
+        request.query(query, (err, result) => {
             if (err) res.json(err)
             else res.json(result.recordset);
         });
     });
-};
+}
 
-exports.addUser = function(req, res)
+export function addUser(req, res)
 {
     var Usuario = req.body;
 
     var query =  `INSERT INTO Usuarios VALUES (${Usuario.TipoUsuario}, '${Usuario.Mail}', '${Usuario.Contraseña}', '${Usuario.AddedDate}', '${Usuario.LastLogin}', '${Usuario.Nombre}', '${Usuario.Apellido}', '${Usuario.Direccion}')`;
 
     console.log(query);
-    var pool = sql.config.connect(function () {
-        const request = new service.Request(sql.config)
-        request.query(query, function (err, result) {
+    var pool = config.connect(() => {
+        const request = new Request(config)
+        request.query(query, (err, result) => {
             if (err) res.json(err)
             else res.json("Se agrego correctamente el usuario");
         });
     });
 }
-exports.updateUser = function(req, res)
+export function updateUser(req, res)
 {
     var UserData = req.body;
 
@@ -56,25 +56,25 @@ exports.updateUser = function(req, res)
                     ,[Direccion] = '${UserData.Direccion}'
                 WHERE [ID] = ${UserData.UserId}`; 
     console.log(query);
-    var pool = sql.config.connect(function () {
-        const request = new service.Request(sql.config)
-        request.query(query, function (err, result) {
+    var pool = config.connect(() => {
+        const request = new Request(config)
+        request.query(query, (err, result) => {
             if (err) res.json(err)
             else res.json("Se actualizo correctamente el usuario.");
         });
     });
 }
 
-exports.deleteUser = function(req, res)
+export function deleteUser(req, res)
 {
     var UserId = req.body.UserId;
 
     var query = `DELETE FROM  [dbo].[Usuarios]
                 WHERE [ID] = ${UserId}`; 
 
-    var pool = sql.config.connect(function () {
-        const request = new service.Request(sql.config)
-        request.query(query, function (err, result) {
+    var pool = config.connect(() => {
+        const request = new Request(config)
+        request.query(query, (err, result) => {
             if (err) res.json(err)
             else res.json("Se elimino correctamente el usuario.");
         });

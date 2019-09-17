@@ -1,11 +1,11 @@
-var express= require('express');
+import express from 'express';
 var app = express();
-var bodyParser = require('body-parser');
-var routes = require('./routes/index');
-var db = require('./services/index')
+import { json } from 'body-parser';
+import { assignRoutes } from './routes/index';
+import db from './services/index';
 
-app.use(bodyParser.json());
-routes.assignRoutes(app);
+app.use(json());
+assignRoutes(app);
 
 
 var server = app.listen(3000, function () {
