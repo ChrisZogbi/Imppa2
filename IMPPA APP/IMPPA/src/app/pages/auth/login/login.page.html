@@ -1,5 +1,32 @@
-<ion-header>
-  <ion-nav>
-    <ion-title>Login</ion-title>
-  </ion-nav>
-</ion-header>
+<ion-content padding>
+    <ion-text color="dark">
+      <h2>¡Bienvenido a IMPPA!</h2>
+    </ion-text>
+    <ion-text color="dark">
+        <h3>Solo debes iniciar sesion</h3>
+      </ion-text>
+    <form #form="ngForm" (ngSubmit)="login(form)" method="post">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input ngModel required="true" size="1000" inputmode="email" autofocus="true" type="email" name="email"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input ngModel required="true" size="9000" type="password" name="password"></ion-input>
+      </ion-item>
+      <ion-row>
+      </ion-row>
+      <ion-button type="submit" shape="round" expand="full" color="primary">Iniciar Sesion</ion-button>
+  <ion-row>
+  <ion-col>
+      <ion-button size="small" fill="clear" (click)="registerModal()">¿Olvidaste tu contraseña?</ion-button>
+  </ion-col>  
+  <ion-col>
+      <ion-button size="small" fill="clear" (click)="registerModal()">Registrarse</ion-button>
+  </ion-col>
+  </ion-row>
+      <p text-center>O</p>
+      <ion-button expand="full"shape="round" color="danger" (click)="loginGoogle()">Iniciar con Google</ion-button>
+    </form>
+  </ion-content>
