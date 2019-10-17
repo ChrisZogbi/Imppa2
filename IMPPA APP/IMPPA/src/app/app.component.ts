@@ -13,13 +13,13 @@ import { AlertService } from './services/alert/alert.service';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Dashboard',
-      url: '/dashboard',
-      icon: 'home'
+      title: 'Configuracion',
+      url: '/profile',
+      icon: 'settings'
     },
     {
-      title: 'Home',
-      url: '/home',
+      title: 'Busqueda',
+      url: '/index',
       icon: 'home'
     }
   ];
