@@ -48,6 +48,6 @@ export class LoginPage implements OnInit {
     //     this.dismissLogin();
     //   }
     //   );
-      this.navCtrl.navigateRoot('/home/index');
+      this.navCtrl.navigateRoot('/index');
   }
 }
