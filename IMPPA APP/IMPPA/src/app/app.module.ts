@@ -10,10 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
-import {AngularFireModule} from 'angularfire2';
-import {AngularFireAuthModule} from 'angularfire2/auth';
-import {GooglePlus} from '@ionic-native/google-plus/ngx';
-
 var firebaseConfig = {
   apiKey: "AIzaSyD_eLFruVnK_vf6HUAKs2BEMwft3bboU80",
   authDomain: "imppa-test.firebaseapp.com",
@@ -34,14 +30,11 @@ var firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule,
     AppRoutingModule,
     HttpClientModule
   ],
   providers: [
     StatusBar,
-    GooglePlus,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NativeStorage
