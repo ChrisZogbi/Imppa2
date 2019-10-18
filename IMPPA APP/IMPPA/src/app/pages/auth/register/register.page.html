@@ -16,19 +16,14 @@
     <ion-slides #signupSlider>
 
         <ion-slide>
-          <signup-step1 #step1></signup-step1>
-          <ion-buttons slot="end">
-              <ion-button *ngIf="step1.step1.valid" (click)="next()">Next <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
-            </ion-buttons>
+          <!-- <signup-step1 #step1></signup-step1> -->
         </ion-slide>
 
         <ion-slide>
-          <signup-step2></signup-step2>
+          <!-- <signup-step2 #step2></signup-step2> -->
         </ion-slide>
 
       </ion-slides>
   <p text-center>Already have a account?</p>
   <ion-button expand="full" color="primary" (click)="loginModal()">Login</ion-button>
-  <ion-button expand="full" color="primary" (click)="register()">Login</ion-button>
-
 </ion-content>  
