@@ -5,4 +5,5 @@ exports.assignRoutes = function (app) {
     app.post('/users', users.addUser);
     app.put('/users', users.updateUser);
     app.delete('/users', users.deleteUser);
+    app.get('/login', users.login)
 }
