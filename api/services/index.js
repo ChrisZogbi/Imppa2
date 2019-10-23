@@ -1,10 +1,11 @@
-import { ConnectionPool } from 'mssql';
+import { createPool } from 'mysql2';
 
-export const config = new ConnectionPool({
-    user: 'ImppaNode',
+export const pool = createPool({
+    user: 'ImppaTest',
     password: 'Lagash2016',
-    server: 'localhost', 
-    database: 'Imppa' 
+    port: '3306',
+    host: '107.180.44.147',
+    database : "Imppa" 
 });
 
 

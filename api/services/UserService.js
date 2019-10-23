@@ -1,17 +1,39 @@
 import app from "../app.js";
-import { config } from "./index";
-import { Request } from "mssql";
+import { pool } from "./index";
+//import { Request } from "mssql";
+
+export function getUserByMailContrasenia (req, res) {
+    var query = `SELECT * FROM Usuarios where Mail = ? and Contrasenia = ?`;
+
+    pool.promise().query(query, [req.body.Mail, req.body.Contrasenia])
+        .then( ([rows,fields]) => {
+            console.log(rows);
+            res.json(fields.length == 1);
+            })
+        .catch(console.log)
+}
 
 export function getUsers(req, res)
 {
-    var pool = config.connect(() => {
-        var query = `SELECT * FROM Usuarios`
-        const request = new Request(config)
-        request.query(query, (err, result) => {
-            if (err) res.json(err)
-            else res.json(result.recordset);
-        });
-    });
+    var query = `SELECT * FROM Usuarios`;
+
+    pool.promise().query(query)
+        .then( ([rows,fields]) => {
+            console.log(rows);
+            res.json(rows);
+            })
+        .catch(console.log)
+        
+
+
+    // var pool = config.connect(() => {
+        
+    //     const request = new Request(config)
+    //     request.query(query, (err, result) => {
+    //         if (err) res.json(err)
+    //         else res.json(result.recordset);
+    //     });
+    // });
 }
 
 export function getUser(req, res)
