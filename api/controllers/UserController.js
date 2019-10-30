@@ -30,7 +30,7 @@ exports.deleteUser = function(req, res) {
   return(UserService.deleteUser(req, res));
 };
 
-exports.login = (req, res) => {
-  console.log(req.body);
+exports.loginUser = (req, res) => {
+  console.log("LoginUser UserController  " + req.query.Mail);
   return(UserService.getUserByMailContrasenia(req, res))
 };

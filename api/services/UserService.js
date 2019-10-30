@@ -4,13 +4,12 @@ import { pool } from "./index";
 
 export function getUserByMailContrasenia (req, res) {
     var query = `SELECT * FROM Usuarios where Mail = ? and Contrasenia = ?`;
-
-    pool.promise().query(query, [req.body.Mail, req.body.Contrasenia])
+    pool.promise().query(query, [req.query.Mail, req.query.Pass])
         .then( ([rows,fields]) => {
-            console.log(rows);
-            res.json(fields.length == 1);
+            console.log(rows.length);
+            res.json(rows.length == 1);
             })
-        .catch(console.log)
+        .catch("Error:" + console.log)
 }
 
 export function getUsers(req, res)

@@ -17,6 +17,7 @@ exports.deleteUser = (req, res) => {
     return(UserController.deleteUser(req, res));
 }
 
-exports.login = (req, res) => {
-    return(UserController.login(req, res));
+exports.loginUser = (req, res) => {
+    console.log("Llego");
+    return(UserController.loginUser(req, res));
 }
