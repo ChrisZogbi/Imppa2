@@ -1,4 +1,3 @@
-import { SignupStep1Component } from './../../../components/signup-step1/signup-step1.component';
 import { SignupStep1Component } from 'src/app/components/signup-step1/signup-step1.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
@@ -17,6 +16,7 @@ export class RegisterPage implements OnInit {
 
   @ViewChild('signupSlider', {static: false}) signupSlider;
   @ViewChild(SignupStep1Component, {static: false}) step1: SignupStep1Component;
+  @ViewChild(SignupStep2Component, {static: false}) step2: SignupStep2Component;
 
   constructor(private modalController: ModalController,
               private authService: AuthService,

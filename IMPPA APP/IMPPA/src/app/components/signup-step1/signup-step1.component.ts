@@ -15,7 +15,10 @@ export class SignupStep1Component implements OnInit {
   ngOnInit(){
     this.step1 = this.formBuilder.group({
       name: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      lastName: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+      lastName: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required, onBlurControl])],
     });
+  }
+
+  onBlurControl(g: FormGroup){
   }
 }

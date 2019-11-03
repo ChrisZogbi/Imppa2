@@ -3,12 +3,6 @@
       <ion-title>
         Sign Up
       </ion-title>
-      <ion-buttons slot="start">
-        <ion-button (click)="prev()"><ion-icon slot="start" name="arrow-back"></ion-icon> Prev</ion-button>
-      </ion-buttons>
-      <ion-buttons slot="end">
-        <ion-button (click)="next()">Next <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
-      </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -17,18 +11,24 @@
 
         <ion-slide>
           <signup-step1 #step1></signup-step1>
-          <ion-buttons slot="end">
-              <ion-button *ngIf="step1.step1.valid" (click)="next()">Next <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
-            </ion-buttons>
         </ion-slide>
 
         <ion-slide>
-          <signup-step2></signup-step2>
+          <signup-step2 #step2></signup-step2>
         </ion-slide>
 
       </ion-slides>
-  <p text-center>Already have a account?</p>
-  <ion-button expand="full" color="primary" (click)="loginModal()">Login</ion-button>
-  <ion-button expand="full" color="primary" (click)="register()">Login</ion-button>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+              <ion-col class="ion-align-self-center" size="3" offset="4">
+                    <ion-button color="success" *ngIf="step1.step1.valid" (click)="next()">Continuar</ion-button>
+              </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-center">
+        <ion-col size="10" offset="2">
+          <a text-center (click)="loginModal()">¿Ya tienes una cuenta creada?</a>  
+        </ion-col>      
+        </ion-row>
+      </ion-grid>
 
 </ion-content>  
