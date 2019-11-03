@@ -29,3 +29,8 @@ exports.deleteUser = function(req, res) {
   console.log(req.body);
   return(UserService.deleteUser(req, res));
 };
+
+exports.loginUser = (req, res) => {
+  console.log("LoginUser UserController  " + req.query.Mail);
+  return(UserService.getUserByMailContrasenia(req, res))
+};
