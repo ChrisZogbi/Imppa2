@@ -1,4 +1,5 @@
 import { getUsers, addUser, updateUser, deleteUser, loginUser } from './userRoutes'
+import { getTipoUsuario, addTipoUsuario, updateTipoUsuario, deleteTipoUsuario } from './tipoUsuarioRoutes'
 
 export function assignRoutes(app) {
     app.route('/users/')
@@ -8,20 +9,11 @@ export function assignRoutes(app) {
         .delete(deleteUser);
     
     app.route('/login/')
-        .get(loginUser);
-    //  app.get('/users', users.getUsers)
-    //  app.post('/users', users.addUser)
-    //  app.put('/users', users.updateUser)
-    //  app.delete('/users', users.deleteUser)
-    //  app.get('/login', users.login)
+        .post(loginUser);
+
+    app.route('/tipoUsuario/')
+        .get(getTipoUsuario)
+        .post(addTipoUsuario)
+        .put(updateTipoUsuario)
+        .delete(deleteTipoUsuario);
 }
-// app.route('/book')
-//   .get(function(req, res) {
-//     res.send('Get a random book');
-//   })
-//   .post(function(req, res) {
-//     res.send('Add a book');
-//   })
-//   .put(function(req, res) {
-//     res.send('Update the book');
-//   });
