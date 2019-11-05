@@ -16,7 +16,7 @@ export function getTipoUsuario(req, res)
 
 export function getTipoUsuarioById(req, res)
 {
-    var query = `SELECT * FROM TipoUsuario WHERE ID = ?s`;
+    var query = `SELECT * FROM TipoUsuario WHERE ID = ?`;
 
     pool.promise().query(query, [req.query.Id])
         .then( ([rows,fields]) => {

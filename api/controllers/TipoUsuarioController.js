@@ -25,12 +25,7 @@ exports.updateTipoUsuario = function(req, res) {
   return(TipoUsuarioService.updateTipoUsuario(req, res));
 };
 
-exports.deleteUser = function(req, res) {
+exports.deleteTipoUsuario = function(req, res) {
   console.log(req.body);
-  return(UserService.deleteUser(req, res));
-};
-
-exports.loginUser = (req, res) => {
-  console.log("LoginUser UserController  " + req.query.Mail);
-  return(UserService.getUserByMailContrasenia(req, res))
+  return(TipoUsuarioService.deleteTipoUsuario(req, res));
 };

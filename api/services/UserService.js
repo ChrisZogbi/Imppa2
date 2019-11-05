@@ -6,6 +6,7 @@ export function getUserByMailContrasenia (req, res) {
     var query = `SELECT * FROM Usuarios where Mail = ? and Contrasenia = ?`;
     pool.promise().query(query, [req.body.Mail, req.body.Pass])
         .then( ([rows,fields]) => {
+            console.log(query);
             console.log(req.body.Mail + req.body.Pass);
             res.json(rows.length == 1);
             })
