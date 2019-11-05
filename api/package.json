@@ -10,6 +10,7 @@
   "description": "",
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
+    "babel-register": "^6.26.0",
     "express": "^4.17.1",
     "msnodesqlv8": "^0.8.2",
     "mssql": "^5.1.0",
