@@ -8,8 +8,28 @@ export function getUserByMailContrasenia (req, res) {
         .then( ([rows,fields]) => {
             console.log(query);
             console.log(req.body.Mail + req.body.Pass);
-            res.json(rows.length == 1);
-            })
+            var data;
+            if(rows.length == 1)
+            {
+                data = 
+                {
+                    "ID": rows[0].ID,
+                    "TipoUsuario": rows[0].TipoUsuario,
+                    "Mail": rows[0].Mail,
+                    "Contrasenia":rows[0].Contrasenia,
+                    "AddedDate": rows[0].AddedDate,
+                    "LastLogin": rows[0].LastLogin,
+                    "Nombre": rows[0].Nombre,
+                    "Apellido": rows[0].Apellido,
+                    "Telefono1": rows[0].Telefono1,
+                    "Telefono2":rows[0].Telefono2,
+                    "Habilitado": rows[0].Habilitado == 0 ? true : false
+                }
+                console.log(data);
+            }
+            
+            res.json(data);
+        })
         .catch("Error:" + console.log)
 }
 
@@ -52,16 +72,15 @@ export function addUser(req, res)
 {
     var Usuario = req.body;
 
-    var query =  `INSERT INTO Usuarios VALUES (${Usuario.TipoUsuario}, '${Usuario.Mail}', '${Usuario.Contraseña}', '${Usuario.AddedDate}', '${Usuario.LastLogin}', '${Usuario.Nombre}', '${Usuario.Apellido}', '${Usuario.Direccion}')`;
+    var query =  `INSERT INTO Usuarios SET ?`
+    //`INSERT INTO Usuarios VALUES (4, ${Usuario.TipoUsuario}, '${Usuario.Mail}', '${Usuario.Contraseña}', '${Usuario.AddedDate}', '${Usuario.LastLogin}', '${Usuario.Nombre}', '${Usuario.Apellido}',  ${Usuario.Telefono1}, ${Usuario.Telefono2}, ${Usuario.Habilitado})`;
 
     console.log(query);
-    var pool = config.connect(() => {
-        const request = new Request(config)
-        request.query(query, (err, result) => {
-            if (err) res.json(err)
-            else res.json("Se agrego correctamente el usuario");
-        });
-    });
+    pool.promise().query(query, [req.body])
+        .then( ([rows,fields]) => {
+            res.status(200).json("Ok.")
+        })
+        .catch(console.log)
 }
 export function updateUser(req, res)
 {
