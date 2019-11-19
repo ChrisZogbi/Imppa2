@@ -1,6 +1,5 @@
 import app from "../app.js";
 import { pool } from "./index";
-//import { Request } from "mssql";
 
 export function getUserByMailContrasenia (req, res) {
     var query = `SELECT * FROM Usuarios where Mail = ? and Contrasenia = ?`;
@@ -43,29 +42,20 @@ export function getUsers(req, res)
             res.json(rows);
             })
         .catch(console.log)
-        
-
-
-    // var pool = config.connect(() => {
-        
-    //     const request = new Request(config)
-    //     request.query(query, (err, result) => {
-    //         if (err) res.json(err)
-    //         else res.json(result.recordset);
-    //     });
-    // });
 }
 
 export function getUser(req, res)
 {
-    var pool = config.connect(() => {
-        var query = `SELECT * FROM Usuarios WHERE ID = ${req.body.UserId}`
-        const request = new Request(config)
-        request.query(query, (err, result) => {
-            if (err) res.json(err)
-            else res.json(result.recordset);
-        });
-    });
+
+    var query = `SELECT * FROM Usuarios WHERE ID = ?`
+    var idUsuario = req.body.IDUsuario;
+
+    pool.promise().query(query, [idUsuario])
+        .then( ([rows,fields]) => {
+            console.log(rows);
+            res.json(rows);
+            })
+        .catch(console.log)
 }
 
 export function addUser(req, res)
@@ -73,20 +63,20 @@ export function addUser(req, res)
     var Usuario = req.body;
 
     var query =  `INSERT INTO Usuarios SET ?`
-    //`INSERT INTO Usuarios VALUES (4, ${Usuario.TipoUsuario}, '${Usuario.Mail}', '${Usuario.Contraseña}', '${Usuario.AddedDate}', '${Usuario.LastLogin}', '${Usuario.Nombre}', '${Usuario.Apellido}',  ${Usuario.Telefono1}, ${Usuario.Telefono2}, ${Usuario.Habilitado})`;
 
     console.log(query);
-    pool.promise().query(query, [req.body])
+    pool.promise().query(query, [Usuario])
         .then( ([rows,fields]) => {
             res.status(200).json("Ok.")
         })
         .catch(console.log)
 }
+
 export function updateUser(req, res)
 {
     var UserData = req.body;
 
-    var query = `UPDATE [dbo].[Usuarios]
+    var query = `UPDATE [dbo].[Comentarios]
                     SET [TipoUsuario] = ${UserData.TipoUsuario}
                     ,[Mail] = '${UserData.Mail}'
                     ,[Contraseña] = '${UserData.Contraseña}'
@@ -97,27 +87,23 @@ export function updateUser(req, res)
                     ,[Direccion] = '${UserData.Direccion}'
                 WHERE [ID] = ${UserData.UserId}`; 
     console.log(query);
-    var pool = config.connect(() => {
-        const request = new Request(config)
-        request.query(query, (err, result) => {
-            if (err) res.json(err)
-            else res.json("Se actualizo correctamente el usuario.");
-        });
-    });
+    pool.promise().query(query, [Usuario])
+        .then( ([rows,fields]) => {
+            res.status(200).json("Se actualizo correctamente el Usuario.")
+        })
+        .catch(console.log)
 }
 
 export function deleteUser(req, res)
 {
-    var UserId = req.body.UserId;
+    var UserId = req.body.Id;
 
     var query = `DELETE FROM  [dbo].[Usuarios]
-                WHERE [ID] = ${UserId}`; 
+                WHERE [ID] = ?`; 
 
-    var pool = config.connect(() => {
-        const request = new Request(config)
-        request.query(query, (err, result) => {
-            if (err) res.json(err)
-            else res.json("Se elimino correctamente el usuario.");
-        });
-    });
+    pool.promise().query(query, [UserId])
+        .then( ([rows,fields]) => {
+            res.status(200).json("Se elimino correctamente el Usuario.")
+        })
+        .catch(console.log)
 }
