@@ -10,6 +10,6 @@ assignRoutes(app);
 
 
 var server = app.listen(port, function () {
-    console.log('Server is running in' + port);
+    console.log('Server is running in ' + port);
 });
 
