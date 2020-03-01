@@ -127,8 +127,8 @@ CREATE TABLE LogErrores
 
 CREATE TABLE DiasXClase
 (
-	`ID` INT AUTO_INCREMENT PRIMARY KEY,
-	`IDClaseProfesor` INT NOT NULL,
+    `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `IDClaseProfesor` INT NOT NULL,
     `Lunes` BIT NOT NULL,
     `Martes` BIT NOT NULL,
     `Miercoles` BIT NOT NULL,
