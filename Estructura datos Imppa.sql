@@ -125,3 +125,16 @@ CREATE TABLE LogErrores
     FOREIGN KEY (IDUsuario) REFERENCES Usuarios(ID)
 )CHARSET=utf8;
 
+CREATE TABLE DiasXClase
+(
+	`ID` INT AUTO_INCREMENT PRIMARY KEY,
+	`IDClaseProfesor` INT NOT NULL,
+    `Lunes` BIT NOT NULL,
+    `Martes` BIT NOT NULL,
+    `Miercoles` BIT NOT NULL,
+    `Jueves` BIT NOT NULL,
+    `Viernes` BIT NOT NULL,
+    `Sabado` BIT NOT NULL,
+    `Domingo` BIT NOT NULL,
+    FOREIGN KEY (IDClaseProfesor) REFERENCES ClaseProfesor(ID)
+);
